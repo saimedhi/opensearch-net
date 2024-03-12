@@ -54,8 +54,10 @@ type TestRunner(client:IOpenSearchLowLevelClient, version: string, suite: string
         }
         let sw = Stopwatch.StartNew()
         try
-        
+            printfn "--------------------------------------")
             printfn "Executing operation: %s" (operation.Log())
+            printfn "Folder, File: %s %s " Folder.Name File.Name
+
             let! pass = this.OperationExecutor.Execute executionContext subProgressBar
             executionContext.Elapsed := sw.ElapsedMilliseconds
             match pass with
