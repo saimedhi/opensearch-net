@@ -56,7 +56,7 @@ type TestRunner(client:IOpenSearchLowLevelClient, version: string, suite: string
         try
             printfn "--------------------------------------"
             printfn "Executing operation: %s" (operation.Log())
-            printfn "Folder, File: %s %s " Folder.Name File.Name
+            printfn "Folder, File: %s %s " executionContext.Folder.Name executionContext.File.Name
 
             let! pass = this.OperationExecutor.Execute executionContext subProgressBar
             executionContext.Elapsed := sw.ElapsedMilliseconds
