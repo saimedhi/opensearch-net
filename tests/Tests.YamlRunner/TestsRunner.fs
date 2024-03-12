@@ -54,6 +54,8 @@ type TestRunner(client:IOpenSearchLowLevelClient, version: string, suite: string
         }
         let sw = Stopwatch.StartNew()
         try
+        
+            printfn "Executing operation: %s" (operation.Log())
             let! pass = this.OperationExecutor.Execute executionContext subProgressBar
             executionContext.Elapsed := sw.ElapsedMilliseconds
             match pass with
