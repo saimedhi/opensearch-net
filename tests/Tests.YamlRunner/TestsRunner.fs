@@ -61,11 +61,13 @@ type TestRunner(client:IOpenSearchLowLevelClient, version: string, suite: string
             match pass with
             | Failed f ->
                 let c = pass.Context
+                printfn "Operation failed: %s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
                 subProgressBar.WriteLine <| sprintf "%s %s %s: %s %s" pass.Name c.Folder.Name c.File.Name (operation.Log()) (f.Log())
             | _ -> ignore()
             return pass
         with
         | e ->
+            printfn "Exception occurred while executing operation: %s" (operation.Log())
             subProgressBar.WriteLine <| sprintf "E! File: %s/%s Op: (%i) %s Section: %s " file.Directory.Name file.Name nth (operation.Log()) section 
             return Failed <| SeenException (executionContext, e)
     }
