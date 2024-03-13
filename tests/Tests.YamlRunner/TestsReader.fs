@@ -100,7 +100,12 @@ let private mapSkip (operation:YamlMap) =
                 |> Array.toList
             Some <| versions
         | None -> None
-        
+    // Print the extracted information
+    printfn "Extracted Skip Information:"
+    printfn "Version: %A" versionRange
+    printfn "Reason: %A" reason
+    printfn "Features: %A" features
+ 
     Skip { Version=versionRange; Reason=reason; Features=features }
     
 let private mapNumericAssert (operation:YamlMap) =
