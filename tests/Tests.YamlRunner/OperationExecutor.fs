@@ -464,7 +464,9 @@ type OperationExecutor(client:IOpenSearchLowLevelClient) =
                 match (s.Version, s.Features) with
                 | (Some v, Some features) ->
                     match (versionRangeCheck v) with
-                    | Skipped (op, r) -> Skipped (op, r)
+                    | Skipped (op, r) -> 
+                        printfn "Skipping operation '%s': %s" op.Section r // Print skip reason
+                        Skipped (op, r)
                     | _ ->
                         featureCheck features
                 | (Some v, None) -> 
